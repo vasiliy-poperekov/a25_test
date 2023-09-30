@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CreateEmployeeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::post(
+    'employees',
+    [CreateEmployeeController::class, 'create']
+)->name('api.employees.create');
