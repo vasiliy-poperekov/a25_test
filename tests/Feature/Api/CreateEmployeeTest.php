@@ -4,10 +4,9 @@ namespace Tests\Feature\Api;
 
 use App\Models\Employees;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class CreateEmployeeControllerTest extends TestCase
+class CreateEmployeeTest extends TestCase
 {
     use RefreshDatabase;
 
