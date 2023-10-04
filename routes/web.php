@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CreateEmployeeController;
 use App\Http\Controllers\CreateTransactionController;
+use App\Http\Controllers\GetTransactionsSumPerEmployeeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,3 +25,8 @@ Route::post(
     'transactions',
     [CreateTransactionController::class, 'create']
 )->name('api.transactions.create');
+
+Route::get(
+    'transactions/sum',
+    [GetTransactionsSumPerEmployeeController::class, 'getSumPerEmployee']
+)->name('api.transactions.getSumPerEmployee');

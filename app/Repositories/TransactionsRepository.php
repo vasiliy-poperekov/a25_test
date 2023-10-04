@@ -3,10 +3,10 @@
 namespace App\Repositories;
 
 use App\Models\Transactions;
+use Illuminate\Database\Eloquent\Collection;
 
 class TransactionsRepository
 {
-    private const OPTIMAL_CHUNK_SIZE = 1;
     public function create(int $employeeId, int $hours): Transactions
     {
         return Transactions::create([
@@ -15,11 +15,11 @@ class TransactionsRepository
         ]);
     }
 
-    public function getByEmployeeId(
-        int $employeeId,
-        int $optimalChunkSize = self::OPTIMAL_CHUNK_SIZE
-    ) {
-        return Transactions::where('employee_id', $employeeId)->chunk($optimalChunkSize);
+    public function getAllUnpaidPerEmployee(): Collection
+    {
+        return Transactions::where('is_paid', false)->groupBy('employee_id')
+        ->selectRaw('employee_id, sum(hours) as hours')
+        ->get();
     }
 
     public function getLastByEmployeeId(int $employeeId): ?Transactions
