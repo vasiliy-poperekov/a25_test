@@ -3,6 +3,7 @@
 use App\Http\Controllers\CreateEmployeeController;
 use App\Http\Controllers\CreateTransactionController;
 use App\Http\Controllers\GetTransactionsSumPerEmployeeController;
+use App\Http\Controllers\PayForUnpaidTransactionsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,3 +31,8 @@ Route::get(
     'transactions/sum',
     [GetTransactionsSumPerEmployeeController::class, 'getSumPerEmployee']
 )->name('api.transactions.getSumPerEmployee');
+
+Route::put(
+    'transactions/pay',
+    [PayForUnpaidTransactionsController::class, 'pay']
+)->name('api.transactions.pay');
