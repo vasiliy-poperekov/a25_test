@@ -2,19 +2,19 @@
 
 namespace App\UseCases;
 
-use App\Repositories\TransactionsRepository;
+use App\Dao\PayDao;
 
 class PayForUnpaidTransactionsUseCase
 {
-    private TransactionsRepository $repository;
+    private PayDao $payDao;
 
-    public function __construct()
+    public function __construct(PayDao $payDao)
     {
-        $this->repository = new TransactionsRepository();
+        $this->payDao = $payDao;
     }
     
     public function handle(): void
     {
-        $this->repository->payForAllUnpaid();
+        $this->payDao->pay();
     }
 }

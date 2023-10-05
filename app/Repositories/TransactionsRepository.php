@@ -2,12 +2,12 @@
 
 namespace App\Repositories;
 
+use App\Dao\PayDao;
 use App\Models\Transactions;
 use Illuminate\Database\Eloquent\Collection;
 
-class TransactionsRepository
+class TransactionsRepository implements PayDao
 {
-    private const OPTIMAL_CHUNK_SIZE = 100;
     public function create(int $employeeId, int $hours): Transactions
     {
         return Transactions::create([
@@ -30,9 +30,9 @@ class TransactionsRepository
             ->first();
     }
 
-    public function payForAllUnpaid(int $chunkSize = self::OPTIMAL_CHUNK_SIZE)
+    public function pay(int $chunkSize = self::OPTIMAL_SELECT_CHUNK): void
     {
-        return Transactions::where('is_paid', false)->chunkById($chunkSize, function (Collection $transactions) {
+        Transactions::where('is_paid', false)->chunkById($chunkSize, function (Collection $transactions) {
             foreach ($transactions as $transaction) {
                 $transaction->update(['is_paid' => true]);
             }

@@ -9,9 +9,9 @@ class PayForUnpaidTransactionsController extends Controller
 {
     private PayForUnpaidTransactionsUseCase $payUseCase;
 
-    public function __construct()
+    public function __construct(PayForUnpaidTransactionsUseCase $payUseCase)
     {
-        $this->payUseCase = new PayForUnpaidTransactionsUseCase();
+        $this->payUseCase = $payUseCase;
     }
 
     public function pay(): JsonResponse

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('employee_id')->index();
             $table->integer('hours');
-            $table->boolean('is_paid')->default(false);
+            $table->boolean('is_paid')->default(false)->index();
             $table->timestamps();
         });
     }
